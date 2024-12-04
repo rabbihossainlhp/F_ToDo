@@ -92,3 +92,14 @@ button:active{
     padding-left: 5px;
     outline: none;
 }
+
+.Signup-Form button{
+    width: 100px;
+    height: 27px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 2px 2px 7px rgb(44, 43, 43);
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: rgb(40, 218, 158);
+}
