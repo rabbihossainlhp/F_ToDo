@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const  cors = require("cors");
 const userRouter = require("./Routes/userRoute");
+const loginRouter = require("./Routes/loginRoute");
 /**
  * 
  * 
@@ -19,6 +20,7 @@ dotenv.config();
  *///Routing.....
 
 app.use("/signup",userRouter);
+app.use("/login",loginRouter);
 app.get("/",(req,res)=>{res.send("<h2>HOME</h2>")});
 /**
  * 

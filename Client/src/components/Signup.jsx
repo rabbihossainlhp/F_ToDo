@@ -31,6 +31,8 @@ const Signup = () => {
                 setPhone("");
                 setEmail("");
                 setPassword("");
+
+                
             }          
         }catch(err){
             console.log("Error",err);
