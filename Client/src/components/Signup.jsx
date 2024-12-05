@@ -32,6 +32,9 @@ const Signup = () => {
                 setEmail("");
                 setPassword("");
 
+                setTimeout(() => {
+                    navigate("/login");
+                }, 1000);
                 
             }          
         }catch(err){

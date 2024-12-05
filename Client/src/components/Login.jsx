@@ -31,8 +31,8 @@ const Login = () => {
                 setPassword("");
 
                 setTimeout(() => {
-                    navigate("/home");
-                }, 2000);
+                    navigate("/taskboard");
+                }, 1000);
                 
             }          
         }catch(err){
