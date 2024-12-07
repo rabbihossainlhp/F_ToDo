@@ -61,7 +61,7 @@ body{
 
 
 .hidenWindow{
-    transition: 1.5s;
+    opacity: 0;
     width: 65vmin;
     height: 72vmin;
     position: absolute;
@@ -76,8 +76,22 @@ body{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    z-index: 10;
 }
 
+.hidenWindow.show{
+    opacity: 1;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity:1;
+    }
+}
 .clsBtn{
     background-color: cadetblue;
     width: 45px; height: 45px;
