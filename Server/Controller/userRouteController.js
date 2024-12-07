@@ -1,4 +1,5 @@
 //dependencies.....
+const bcrypt = require("bcrypt");
 const UserModel = require("../Models/UserSchema");
 
 //module_scuffholder....
@@ -9,13 +10,14 @@ const Controller = {};
 Controller.createData = async(req,res)=>{
 
     let {name,phone,email,password} = req.body;
+    let hashPass = await bcrypt.hash(password,10);
     try{
         if(name && phone && email && password){
             let checkUser = await UserModel.findOne({email});
             if(checkUser){
                 return res.status(401).json({err:"user is alreaty exist"});
             }
-            let CreateUser = await UserModel({name,phone,email,password});
+            let CreateUser = await UserModel({name,phone,email,password:hashPass});
             await CreateUser.save();
             return res.status(201).json(CreateUser);
         }else{

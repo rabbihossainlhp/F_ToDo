@@ -1,4 +1,5 @@
 //dependencies.....
+const bcrypt = require("bcrypt");
 const UserModel = require("../Models/UserSchema");
 
 //module_scuffholder....
@@ -12,7 +13,8 @@ Controller.checkData = async(req,res)=>{
         try{
             const checkLogin = await UserModel.findOne({email});
             if(checkLogin){
-                if(password == checkLogin.password){
+                let matchPass = await bcrypt.compare(password,checkLogin.password);
+                if(matchPass){
                     res.status(200).json(checkLogin);
                 }else{
                     return res.status(401).json({err:"autentication failur"});
