@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./ComponentStyle/Signup.css";
 import {useNavigate} from "react-router-dom";
+import { toast } from 'react-toastify';
 
 
 const Signup = () => {
@@ -24,7 +25,8 @@ const Signup = () => {
                                         });
             if(dataFetch.ok){
                 const result = await dataFetch.json();
-                console.log(result);
+                // console.log(result);
+                toast.success("Sign up successfully!!");
 
                 //refresh__form...
                 setName("");
@@ -36,9 +38,12 @@ const Signup = () => {
                     navigate("/login");
                 }, 1000);
                 
+            }else{
+                toast.err("Please input Password or email correctly!!");
             }          
         }catch(err){
             console.log("Error",err);
+            toast.error("Server is not responding well pls try later");
         }
         
     }//__________________________________________________________________________________

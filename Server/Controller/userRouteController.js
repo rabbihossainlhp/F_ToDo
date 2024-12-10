@@ -10,6 +10,10 @@ const Controller = {};
 Controller.createData = async(req,res)=>{
 
     let {name,phone,email,password} = req.body;
+    if (password.length < 5) {
+        return res.status(400).json({ err: "Password must be at least 5 characters long" });
+    }       
+    
     let hashPass = await bcrypt.hash(password,10);
     try{
         if(name && phone && email && password){

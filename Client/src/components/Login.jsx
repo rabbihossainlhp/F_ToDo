@@ -2,6 +2,7 @@ import React from 'react';
 import "./ComponentStyle/Login.css"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
@@ -25,18 +26,27 @@ const Login = () => {
             if(dataFetch.ok){
                 const result = await dataFetch.json();
                 console.log(result);
-
+                if(result.token){
+                    localStorage.setItem("token",result);
+                    toast.success("Login SucessFully!");
+                }else{
+                    // console.log("Token is not receved from server");
+                    toast.error("Something wrong with login/token info");
+                }
+    
                 //refresh__form...
                 setEmail("");
                 setPassword("");
-
+    
                 setTimeout(() => {
                     navigate("/taskboard");
                 }, 1000);
                 
-            }          
+            }else{
+                toast.error("Please fillup form correctly");
+            }       
         }catch(err){
-            console.log("Error",err);
+            toast.error("Something is wrong..");
         }
         
     }//__________________________________________________________________________________   

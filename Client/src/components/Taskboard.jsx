@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./ComponentStyle/Taskboard.css";
 
 const Taskboard = () => {
     const [isOpenWindow, setIsOpenWindow] = useState(false);
+    const navigate = useNavigate();
+
+    //verify with useEffect________________________
+    useEffect(()=>{
+        const token = localStorage.getItem("token");
+        if(!token){
+            navigate("/login");
+        }
+    },[])
+
 
 
     //handle hiden button__________________________

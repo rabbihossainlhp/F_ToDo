@@ -4,7 +4,7 @@ const {createData} = require("../Controller/userRouteController");
 
 //Decleare some route .......
 //____POST/CREATE_____
-Router.post("/",createData);
+Router.post("/", createData);
 
 
 //exporting....
