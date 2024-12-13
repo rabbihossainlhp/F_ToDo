@@ -27,7 +27,8 @@ const Login = () => {
                 const result = await dataFetch.json();
                 console.log(result);
                 if(result.token){
-                    localStorage.setItem("token",result);
+                    localStorage.setItem("token",result.token);
+                    localStorage.setItem("uid",result.uid);
                     toast.success("Login SucessFully!");
                 }else{
                     // console.log("Token is not receved from server");

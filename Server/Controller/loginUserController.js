@@ -25,11 +25,11 @@ Controller.checkData = async(req,res)=>{
                         userId:checkLogin._id,
                         email:checkLogin.email
                         },
-                        process.env.JWT_Scrt,
-                        {expiresIn:"2h"}    
+                        process.env.JWT_Scrt,   
+                        {expiresIn:"1h"}    
                     );
 
-                    return res.status(200).json({token});
+                    return res.status(200).json({token:token,"uid":checkLogin._id});
                 }else{
                     return res.status(401).json({err:"autentication failur"});
                 }

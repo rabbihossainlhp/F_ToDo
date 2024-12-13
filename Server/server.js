@@ -6,6 +6,7 @@ const  cors = require("cors");
 const userRouter = require("./Routes/userRoute");
 const loginRouter = require("./Routes/loginRoute");
 const checkToken = require("./Routes/taskboardRoute");
+const createTask = require("./Routes/createTaskRoute");
 /**
  * 
  * 
@@ -22,7 +23,8 @@ dotenv.config();
 
 app.use("/signup",userRouter);
 app.use("/login",loginRouter);
-app.use("/taskboard", checkToken, )
+app.use("/taskboard", checkToken );
+app.use("/taskboard/create",createTask);
 app.get("/",(req,res)=>{res.send("<h2>HOME</h2>")});
 /**
  * 

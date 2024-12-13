@@ -5,6 +5,31 @@ import "./ComponentStyle/Taskboard.css";
 const Taskboard = () => {
     const [isOpenWindow, setIsOpenWindow] = useState(false);
     const navigate = useNavigate();
+    
+    const [title,setTitle] = useState();
+    const [subtitle,setSubtitle] = useState();
+    const [description,setDescription] = useState();
+
+    //write handler for sumit........._/
+    const submitHandler = async(e)=>{
+        e.preventDefault();
+        let info = {title,subtitle,description};
+        const getUid = localStorage.getItem("uid");
+
+        try{
+            const response = await fetch('http://localhost:5000/taskboard/create',{
+                method:"POST",
+                headers:{"Content-Type":"application/json","uid":getUid},
+                body:JSON.stringify(info)
+            });
+
+            console.log(response.json());
+
+        }catch(err){
+            console.log("error in catch",err)
+        }
+    }
+
 
     //verify with useEffect________________________
     useEffect(()=>{
@@ -36,6 +61,8 @@ const Taskboard = () => {
         setIsOpenWindow(false);
     }       
 
+    
+
 
     return (
         <div className='Task-container'>
@@ -63,15 +90,15 @@ const Taskboard = () => {
                         <p>Create New Task</p>
                     </div>
                     <div className="formBox">
-                        <form action="">
+                        <form action="" onSubmit={submitHandler}>
                             <div>
                                 <label htmlFor="Title">Title</label>
-                                <input type="text" placeholder='Task Title' />
+                                <input type="text" placeholder='Task Title' onChange={e=>setTitle(e.target.value)} />
                             </div>
     
                             <div>
                                 <label htmlFor="Sub-Title">Subtitle</label>
-                                <input type="text" placeholder='Task Title' />
+                                <input type="text" placeholder='Task Sub-Title' onChange={e=>setSubtitle(e.target.value)}/>
                             </div>
     
                             <div>
@@ -79,6 +106,7 @@ const Taskboard = () => {
                                 <textarea
                                     id="Description"
                                     placeholder="Write task description..."
+                                    onChange={e=>setDescription(e.target.value)}
                                 ></textarea>
                             </div>  
     

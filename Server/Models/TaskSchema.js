@@ -1,8 +1,8 @@
 //dependencies...
-const {Schema,model} = require("mongoose");
+const {Schema} = require("mongoose");
 
 
-const TaskSchema = Schema({
+const TaskSchema = new Schema({
     title:{
         type:String,
         required:true
@@ -15,13 +15,6 @@ const TaskSchema = Schema({
         type:String,
         required:true
     },
-    userId:{
-        type:Schema.Types.ObjectId,
-        ref:"User_Personal",
-        required:true
-    }
 })
 
-
-const Task = model("Task",TaskSchema);
-module.exports = Task;
+module.exports = TaskSchema;
