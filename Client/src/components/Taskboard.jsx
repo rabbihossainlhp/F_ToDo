@@ -6,9 +6,44 @@ const Taskboard = () => {
     const [isOpenWindow, setIsOpenWindow] = useState(false);
     const navigate = useNavigate();
     
-    const [title,setTitle] = useState();
-    const [subtitle,setSubtitle] = useState();
-    const [description,setDescription] = useState();
+    const [title,setTitle] = useState('');
+    const [subtitle,setSubtitle] = useState('');
+    const [description,setDescription] = useState('');
+
+    const [task,setTask] = useState("");
+
+
+
+
+    //verify with useEffect________________________
+    useEffect(()=>{
+        let fetchUserTask = async()=>{
+            const getUid = localStorage.getItem("uid"); 
+            try{
+                let response = await fetch("http://localhost:5000/taskboard/create",{
+                    method:"GET",
+                    headers:{"Content-Type":"application/json","uid":getUid}
+                });
+                let data = await response.json();
+                console.log(data);
+                setTask(data);
+                // console.log(response);
+            }catch(er){
+                console.log("Something is wrong initially fetching task"+e);
+            }
+        }
+        
+        
+        const token = localStorage.getItem("token");
+        if(!token){
+            navigate("/login");
+        }
+
+        //call function fetchUsrTask...
+        fetchUserTask();
+    },[])
+
+
 
     //write handler for sumit........._/
     const submitHandler = async(e)=>{
@@ -22,23 +57,22 @@ const Taskboard = () => {
                 headers:{"Content-Type":"application/json","uid":getUid},
                 body:JSON.stringify(info)
             });
-
-            console.log(response.json());
+            let data = await response.json();
+            console.log(data);
+            console.log(response.ok);
+            if(response.ok){
+                setTask((prvTask)=>[...prvTask,data]),
+                console.log("successfully added");
+                setTitle('');
+                setSubtitle('');
+                setDescription('');
+            }
+            // console.log(response.json());
 
         }catch(err){
             console.log("error in catch",err)
         }
     }
-
-
-    //verify with useEffect________________________
-    useEffect(()=>{
-        const token = localStorage.getItem("token");
-        if(!token){
-            navigate("/login");
-        }
-    },[])
-
 
 
     //handle hiden button__________________________
@@ -71,14 +105,33 @@ const Taskboard = () => {
                     <div className="btnDiv">
                         <button  onClick={hidenBtnHandler}>+ Create New</button>
                     </div>
+
+                    <div className="taskList">
+                        {task.length>0?
+                            task.map((item,index)=>{
+                                return(
+                                    <div className="taskItem" key={index}>
+                                        <h1>{item.title}</h1>
+                                    </div>
+                                )
+                            })
+                        :
+                            (
+                                <p>No Task available</p>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
             <div className="View-Task">
                 <div className="Sub-view">
-
+                    <div className="initialShow">
+                        <h1>Small steps everyday lead to big result</h1>
+                        <p>It’s a gentle reminder that consistent effort, no matter how small, moves you closer to your goals!</p>
+                    </div>
                 </div>
-            </div>
-
+                </div>
+            
             {/* Hidden window_________________________ */}
 
             {isOpenWindow &&(
@@ -93,18 +146,19 @@ const Taskboard = () => {
                         <form action="" onSubmit={submitHandler}>
                             <div>
                                 <label htmlFor="Title">Title</label>
-                                <input type="text" placeholder='Task Title' onChange={e=>setTitle(e.target.value)} />
+                                <input type="text" placeholder='Task Title' value={title} onChange={e=>setTitle(e.target.value)} />
                             </div>
     
                             <div>
                                 <label htmlFor="Sub-Title">Subtitle</label>
-                                <input type="text" placeholder='Task Sub-Title' onChange={e=>setSubtitle(e.target.value)}/>
+                                <input type="text" placeholder='Task Sub-Title' value={subtitle} onChange={e=>setSubtitle(e.target.value)}/>
                             </div>
     
                             <div>
                                 <label htmlFor="Description">Task-Description</label>
                                 <textarea
                                     id="Description"
+                                    value={description}
                                     placeholder="Write task description..."
                                     onChange={e=>setDescription(e.target.value)}
                                 ></textarea>
