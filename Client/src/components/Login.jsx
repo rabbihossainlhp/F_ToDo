@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./ComponentStyle/Login.css"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -52,6 +52,14 @@ const Login = () => {
         
     }//__________________________________________________________________________________   
 
+    
+    //if once login user then he can't back into previous signin/up page...
+    useEffect(()=>{
+        const Localtoken  = localStorage.getItem("token");
+        if(Localtoken){
+            navigate("/taskboard");
+        }
+    },[])
 
 
     //back in sign up page by clicking sign up button on sign in page...

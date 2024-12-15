@@ -1,0 +1,58 @@
+/* Make taskboard available for small devices... */
+
+@media(max-width:853px){
+    .Sidebar{
+        width: 350px;
+        height: 100%;
+        border-right: 2px solid black;
+        padding: 50px 0;
+        transform: translateX(-100%);
+        /* overflow-y: auto; */
+        align-content: center;
+        display: none;
+    }   
+
+    .Task-container .navIcon{
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(121, 180, 180, 0.801);
+        display: flex;
+        top: 12px;
+        left: 12px;
+        padding: 8px;
+        border-radius: 100px;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        z-index: 55;
+    }
+
+    .Sidebar.visibleSidebar{
+        display: block;
+        width: 100%;
+        position: absolute;
+        background-color: rgb(129, 209, 209);
+        z-index: 50;
+        transform: translateX(0%);
+        animation:  transformIn 0.6s ease-in-out;
+    }
+
+
+    @keyframes transformIn{
+        0%{
+            transform: translateX(-100%);
+        }
+        100%{
+            transform: translateX(0%);
+        }
+    }   
+
+    .View-Task .Sub-view{
+        z-index: 5;
+    }
+
+    .hidenWindow{
+        z-index: 70;
+    }
+}

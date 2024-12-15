@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import "./ComponentStyle/Signup.css";
 import {useNavigate} from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -48,6 +48,17 @@ const Signup = () => {
         
     }//__________________________________________________________________________________
     
+
+    //if once login user then he can't back into previous signin/up page...
+    useEffect(()=>{
+        const Localtoken  = localStorage.getItem("token");
+        if(Localtoken){
+            navigate("/taskboard");
+        }
+    },[])       
+
+
+
     //simply navigate login form by clicking sign in btn....
     const navigate = useNavigate();
     const clickSignin = ()=>{
