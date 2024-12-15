@@ -19,7 +19,7 @@ Controller.createTask = async(req,res)=>{
     let {title,subtitle,description} = req.body;
 
     try{
-        if(title&&description){
+        if(title&&subtitle&&description){
             let saveTask = await taskModel({title,subtitle,description});
             await saveTask.save();
             return res.status(201).json(saveTask);
