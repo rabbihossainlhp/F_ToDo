@@ -5,6 +5,7 @@ import {BrowserRouter,Routes,Route} from "react-router-dom"
 import Taskboard from './components/Taskboard'
 import {ToastContainer,toast} from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import Home from './pages/Home'
 
 
 function App() {
@@ -14,9 +15,10 @@ function App() {
     <ToastContainer/>
         <BrowserRouter>
           <Routes>
+            <Route path='/' element={<Home/>}/>
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/login' element={<Login/>}/>
-            <Route path='/taskboard' element={<Taskboard/>}></Route>
+            <Route path='/taskboard' element={<Taskboard/>}/>
           </Routes>
         </BrowserRouter>
     </>

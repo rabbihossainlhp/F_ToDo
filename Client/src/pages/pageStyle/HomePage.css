@@ -1,0 +1,77 @@
+.signup-in{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 15px;
+}
+.signup-in button{
+    width: 100px;
+    height: 35px;
+    border: none;
+    box-shadow: 1px 1px 5px black;
+    margin-left: 10px;
+    background-color: rgb(15, 231, 231);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.quotes{
+    width: 450px;
+    height: 400px;
+    position: relative;
+    left: 50%;
+    margin-top: 2%;
+    transform: translateX(-50%);
+    background-color: rgba(223, 191, 150, 0.616);
+    text-align: center;
+    align-content: center;
+    transition: animation 0.5s ease-in-out;
+    padding: 0 35px;
+    animation: rediusLoop infinite 15s ease-in-out
+}
+
+.startBtn{
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    margin-top: 2.5%;
+}
+
+.startBtn button{
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(65, 231, 15);
+    box-shadow: 0 7px 8px rgb(122, 120, 120);
+    font-weight: 700;
+}
+
+
+
+
+@keyframes rediusLoop{
+    0%{
+        border-radius: 100% 40% 30% 30% ;
+    }
+
+    25%{
+        border-radius: 60% 100% 20% 90% ;
+    }
+
+    50%{
+        border-radius: 60% 50% 100% 100% ;
+    }   
+
+    75%{
+        border-radius: 85% 65% 30% 100% ;
+    }
+
+    100%{
+        border-radius: 30% 40% 40% 75%;
+    }
+    
+}
