@@ -13,7 +13,7 @@ const Taskboard = () => {
     const [description,setDescription] = useState('');
     const [clickNavIcon,setClickNavIcon] = useState(false);
     const [hidenId,setHidenId] = useState(null);
-
+    const [checkDetails,setCheckDetails] = useState(true);
     const [task,setTask] = useState("");
 
 
@@ -137,7 +137,11 @@ const Taskboard = () => {
                         document.querySelector(".descrData").innerText = "";    
                         setHidenId(null);
                         // console.log("deleted");
-                        toast.success("Delete Successfully");
+                        toast.success("Delete Successfully");   
+                        
+                        setCheckDetails(true);
+
+
                     }else{
                         // console.log("faild deletion");
                         toast.error("Delete Faild");
@@ -167,7 +171,7 @@ const Taskboard = () => {
                         {task.length>0?
                             task.map((item,index)=>{
                                 return(
-                                    <div className="taskItem" key={index} onClick={()=>singleTask(index)}>
+                                    <div className="taskItem" key={index} onClick={()=>{singleTask(index);setCheckDetails(false)}}>
                                         <h1>{item.title}</h1>
                                     </div>
                                 )
@@ -187,7 +191,7 @@ const Taskboard = () => {
                         <p>It’s a gentle reminder that consistent effort, no matter how small, moves you closer to your goals!</p>
                     </div>
                     
-                    <div className="detailsView">
+                    <div className={`detailsView ${checkDetails? "":"hideDetails"}`}>
                         <div className="buttons">
                             <button onClick={handleDelete}>Delete</button>
                             <button>Update</button>
