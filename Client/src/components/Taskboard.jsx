@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./ComponentStyle/Taskboard.css";
 import "./ComponentStyle/ResponsiveTaskboard.css";
+import { toast } from 'react-toastify';
 
 const Taskboard = () => {
     const [isOpenWindow, setIsOpenWindow] = useState(false);
@@ -11,6 +12,7 @@ const Taskboard = () => {
     const [subtitle,setSubtitle] = useState('');
     const [description,setDescription] = useState('');
     const [clickNavIcon,setClickNavIcon] = useState(false);
+    const [hidenId,setHidenId] = useState(null);
 
     const [task,setTask] = useState("");
 
@@ -34,6 +36,7 @@ const Taskboard = () => {
                 console.log("Something is wrong initially fetching task"+e);
             }
         }
+        
         
         
         const token = localStorage.getItem("token");
@@ -96,13 +99,54 @@ const Taskboard = () => {
 
         setIsOpenWindow(false);
     }       
-    
+
+    //handle single___ Task....
+    let titleData = document.querySelector(".titleData");
+    let subData = document.querySelector(".subData");  
+    let descrData = document.querySelector(".descrData");
+    const singleTask = (indx)=>{
+        // console.log(task[indx]);
+        titleData.innerText = task[indx].title;
+        subData.innerText = task[indx].subtitle;
+        descrData.innerText = task[indx].description;
+        setHidenId(task[indx]._id);
+        
+    }
 
     //handle toggole the navIcon....
     const toggleNav = ()=>{
         setClickNavIcon((prev)=>!prev);
     }
     
+
+    //handle the delete button _-_-_-_-___-
+    const handleDelete = async ()=>{
+                const getUid = localStorage.getItem("uid"); 
+                try{
+                    let response = await fetch(`http://localhost:5000/taskboard/create/${hidenId}`,{
+                        method:"DELETE",
+                        headers:{"Content-Type":"application/json","uid":getUid}
+                    });console.log(response.ok)
+                    if(response.ok){
+                        let data = await response.json();
+                        console.log(data);
+                        setTask(data);
+                        // console.log(response);
+                        document.querySelector(".titleData").innerText = "";
+                        document.querySelector(".subData").innerText = "";
+                        document.querySelector(".descrData").innerText = "";    
+                        setHidenId(null);
+                        // console.log("deleted");
+                        toast.success("Delete Successfully");
+                    }else{
+                        // console.log("faild deletion");
+                        toast.error("Delete Faild");
+                    }
+                }catch(er){
+                    console.log("Something is wrong initially fetching task"+e);
+                }
+            }
+
 
 
     return (
@@ -123,7 +167,7 @@ const Taskboard = () => {
                         {task.length>0?
                             task.map((item,index)=>{
                                 return(
-                                    <div className="taskItem" key={index}>
+                                    <div className="taskItem" key={index} onClick={()=>singleTask(index)}>
                                         <h1>{item.title}</h1>
                                     </div>
                                 )
@@ -142,6 +186,31 @@ const Taskboard = () => {
                         <h1>Small steps everyday lead to big result</h1>
                         <p>It’s a gentle reminder that consistent effort, no matter how small, moves you closer to your goals!</p>
                     </div>
+                    
+                    <div className="detailsView">
+                        <div className="buttons">
+                            <button onClick={handleDelete}>Delete</button>
+                            <button>Update</button>
+                        </div>
+                        
+                        <div className="taskInfo">
+                            <h1>Your Task</h1>
+                            <div className="title">
+                                <h2 className='infoTitle'>Title:</h2>
+                                <p className='titleData'></p>
+                            </div>
+                            <div className="title">
+                                <h2 className='infoSubtitle'>Sub-Title:</h2>
+                                <p className='subData'></p>
+                            </div>
+                            <div className="title">
+                                <h2 className='infoDescr'>Description:</h2>
+                                <p className='descrData'></p>
+                            </div>
+                            <input type="hidden" className='hidenId' />
+                        </div>
+                    </div>
+
                 </div>
                 </div>
             
