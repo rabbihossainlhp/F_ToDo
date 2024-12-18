@@ -18,7 +18,7 @@ const Signup = () => {
         const data = {name,phone,email,password};
         
         try{
-            const dataFetch = await fetch(`${process.env.REACT_APP_BACKEND}/signup`,{
+            const dataFetch = await fetch(`http://localhost:5000/signup`,{
                                             method: "POST",
                                             headers:{"Content-type":"application/json"},
                                             body:JSON.stringify(data)

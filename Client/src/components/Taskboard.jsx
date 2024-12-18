@@ -24,7 +24,7 @@ const Taskboard = () => {
         let fetchUserTask = async()=>{
             const getUid = localStorage.getItem("uid"); 
             try{
-                let response = await fetch(`${process.env.REACT_APP_BACKEND}/taskboard/create`,{
+                let response = await fetch(`http://localhost/taskboard/create`,{
                     method:"GET",
                     headers:{"Content-Type":"application/json","uid":getUid}
                 });
@@ -57,7 +57,7 @@ const Taskboard = () => {
         const getUid = localStorage.getItem("uid");
 
         try{
-            const response = await fetch(`${process.env.REACT_APP_BACKEND}/taskboard/create`,{
+            const response = await fetch(`http://localhost:5000/taskboard/create`,{
                 method:"POST",
                 headers:{"Content-Type":"application/json","uid":getUid},
                 body:JSON.stringify(info)
@@ -123,7 +123,7 @@ const Taskboard = () => {
     const handleDelete = async ()=>{
                 const getUid = localStorage.getItem("uid"); 
                 try{
-                    let response = await fetch(`${process.env.REACT_APP_BACKEND}/${hidenId}`,{
+                    let response = await fetch(`http://localhost:5000/${hidenId}`,{
                         method:"DELETE",
                         headers:{"Content-Type":"application/json","uid":getUid}
                     });console.log(response.ok)

@@ -13,7 +13,7 @@ const createTask = require("./Routes/createTaskRoute");
  * 
  *///Main application....
 const app = express();
-app.use(cors({origin:"https://f-to-do.vercel.app/"}));
+app.use(cors());
 app.use(express.json());    
 dotenv.config();
 /**
@@ -33,7 +33,7 @@ app.get("/",(req,res)=>{res.send("<h2>HOME</h2>")});
  *///initialize somting for connecting with db
 let pass = encodeURIComponent("123ASDasd@&");
 let mongoUrl = `mongodb+srv://hayat:${pass}@cluster0.ardgf.mongodb.net/Todo_People`;
-let port = process.env.Port ||5000;
+let port = 5000;
 /**
  * 
  * 
