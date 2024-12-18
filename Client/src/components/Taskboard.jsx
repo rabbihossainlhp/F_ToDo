@@ -33,7 +33,7 @@ const Taskboard = () => {
                 setTask(data);
                 // console.log(response);
             }catch(er){
-                console.log("Something is wrong initially fetching task"+e);
+                console.log("Something is wrong initially fetching task"+er);
             }
         }
         
@@ -57,7 +57,7 @@ const Taskboard = () => {
         const getUid = localStorage.getItem("uid");
 
         try{
-            const response = await fetch(`https://todo-server-74qt.onrender.com/create`,{
+            const response = await fetch(`https://todo-server-74qt.onrender.com/taskboard/create`,{
                 method:"POST",
                 headers:{"Content-Type":"application/json","uid":getUid},
                 body:JSON.stringify(info)
