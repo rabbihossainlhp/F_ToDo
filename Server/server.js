@@ -13,8 +13,8 @@ const createTask = require("./Routes/createTaskRoute");
  * 
  *///Main application....
 const app = express();
-app.use(cors({origin:"https://basictodo-one.vercel.app"}));
-app.use(express.json());
+app.use(cors({origin:"https://f-to-do.vercel.app/"}));
+app.use(express.json());    
 dotenv.config();
 /**
  * 
