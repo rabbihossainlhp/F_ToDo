@@ -29,7 +29,7 @@ const Taskboard = () => {
                     headers:{"Content-Type":"application/json","uid":getUid}
                 });
                 let data = await response.json();
-                console.log(data);
+                // console.log(data);
                 setTask(data);
                 // console.log(response);
             }catch(er){
@@ -63,8 +63,8 @@ const Taskboard = () => {
                 body:JSON.stringify(info)
             });
             let data = await response.json();
-            console.log(data);
-            console.log(response.ok);
+            // console.log(data);
+            // console.log(response.ok);
             if(response.ok){
                 setTask((prvTask)=>[...prvTask,data]),
                 console.log("successfully added");
@@ -123,10 +123,10 @@ const Taskboard = () => {
     const handleDelete = async ()=>{
                 const getUid = localStorage.getItem("uid"); 
                 try{
-                    let response = await fetch(`https://todo-server-74qt.onrender.com/${hidenId}`,{
+                    let response = await fetch(`https://todo-server-74qt.onrender.com/taskboard/create/${hidenId}`,{
                         method:"DELETE",
                         headers:{"Content-Type":"application/json","uid":getUid}
-                    });console.log(response.ok)
+                    });
                     if(response.ok){
                         let data = await response.json();
                         console.log(data);
