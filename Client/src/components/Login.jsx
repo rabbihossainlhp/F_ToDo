@@ -18,7 +18,7 @@ const Login = () => {
         const data = {email,password};
         
         try{
-            const dataFetch = await fetch(`${process.env.backendLink}/login`,{
+            const dataFetch = await fetch(`${process.env.REACT_APP_BACKEND}/login`,{
                                             method: "POST",
                                             headers:{"Content-type":"application/json"},
                                             body:JSON.stringify(data)
