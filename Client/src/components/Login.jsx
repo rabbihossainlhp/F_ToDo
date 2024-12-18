@@ -18,7 +18,7 @@ const Login = () => {
         const data = {email,password};
         
         try{
-            const dataFetch = await fetch(`${process.env.REACT_APP_BACKEND}/login`,{
+            const dataFetch = await fetch(`https://todo-server-74qt.onrender.com/login`,{
                                             method: "POST",
                                             headers:{"Content-type":"application/json"},
                                             body:JSON.stringify(data)
