@@ -129,7 +129,7 @@ const Taskboard = () => {
                     });
                     if(response.ok){
                         let data = await response.json();
-                        console.log(data);
+                        // console.log(data);
                         setTask(data);
                         // console.log(response);
                         document.querySelector(".titleData").innerText = "";
