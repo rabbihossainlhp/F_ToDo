@@ -53,6 +53,25 @@
     }
 
     .hidenWindow{
+        opacity: 0;
+        width: 65vmin;
+        height: 90vmin;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100px;
+        
         z-index: 70;
+        
     }
+
+}
+
+.detailsView .taskInfo{
+    font-size: 12px; 
+}
+
+
+.title h2{
+    font-size: 16px;
 }
