@@ -109,8 +109,8 @@ const Taskboard = () => {
         titleData.innerText = task[indx].title;
         subData.innerText = task[indx].subtitle;
         descrData.innerText = task[indx].description;
-        setHidenId(task[indx]._id);
-        
+        setHidenId(task[indx]._id); 
+                
     }
 
     //handle toggole the navIcon....
@@ -171,7 +171,7 @@ const Taskboard = () => {
                         {task.length>0?
                             task.map((item,index)=>{
                                 return(
-                                    <div className="taskItem" key={index} onClick={()=>{singleTask(index);setCheckDetails(false)}}>
+                                    <div className="taskItem" key={index} onClick={()=>{singleTask(index);setCheckDetails(false);setClickNavIcon(false)}}>
                                         <h1>{item.title}</h1>
                                     </div>
                                 )
