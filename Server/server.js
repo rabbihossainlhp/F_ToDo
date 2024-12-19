@@ -16,6 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());    
 dotenv.config();
+app.use(express.static(path.join(__dirname,'../Client/dist')));
 /**
  * 
  * 
@@ -26,6 +27,7 @@ app.use("/login",loginRouter);
 app.use("/taskboard", checkToken );
 app.use("/taskboard/create",createTask);
 app.get("/",(req,res)=>{res.send("<h2>HOME</h2>")});
+app.get("*",(req,res)=>{res.sendFile(path.join(__dirname,'../Client/dist/index.html'))})
 /**
  * 
  * 
