@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import "./ComponentStyle/Login.css"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 
 const Login = () => {
@@ -18,7 +17,7 @@ const Login = () => {
         const data = {email,password};
         
         try{
-            const dataFetch = await fetch(`https://todo-server-74qt.onrender.com/login`,{
+            const dataFetch = await fetch(`http://localhost:5000/login`,{
                                             method: "POST",
                                             headers:{"Content-type":"application/json"},
                                             body:JSON.stringify(data)
@@ -26,40 +25,22 @@ const Login = () => {
             if(dataFetch.ok){
                 const result = await dataFetch.json();
                 console.log(result);
-                if(result.token){
-                    localStorage.setItem("token",result.token);
-                    localStorage.setItem("uid",result.uid);
-                    toast.success("Login SucessFully!");
-                }else{
-                    // console.log("Token is not receved from server");
-                    toast.error("Something wrong with login/token info");
-                }
-    
+
                 //refresh__form...
                 setEmail("");
                 setPassword("");
-    
+
                 setTimeout(() => {
                     navigate("/taskboard");
                 }, 1000);
                 
-            }else{
-                toast.error("Please fillup form correctly");
-            }       
+            }          
         }catch(err){
-            toast.error("Something is wrong..");
+            console.log("Error",err);
         }
         
     }//__________________________________________________________________________________   
 
-    
-    //if once login user then he can't back into previous signin/up page...
-    useEffect(()=>{
-        const Localtoken  = localStorage.getItem("token");
-        if(Localtoken){
-            navigate("/taskboard");
-        }
-    },[])
 
 
     //back in sign up page by clicking sign up button on sign in page...

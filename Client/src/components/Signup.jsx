@@ -1,7 +1,6 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import "./ComponentStyle/Signup.css";
 import {useNavigate} from "react-router-dom";
-import { toast } from 'react-toastify';
 
 
 const Signup = () => {
@@ -18,15 +17,14 @@ const Signup = () => {
         const data = {name,phone,email,password};
         
         try{
-            const dataFetch = await fetch(`https://todo-server-74qt.onrender.com/signup`,{
+            const dataFetch = await fetch(`http://localhost:5000/signup`,{
                                             method: "POST",
                                             headers:{"Content-type":"application/json"},
                                             body:JSON.stringify(data)
                                         });
             if(dataFetch.ok){
                 const result = await dataFetch.json();
-                // console.log(result);
-                toast.success("Sign up successfully!!");
+                console.log(result);
 
                 //refresh__form...
                 setName("");
@@ -38,27 +36,13 @@ const Signup = () => {
                     navigate("/login");
                 }, 1000);
                 
-            }else{
-                toast.err("Please input Password or email correctly!!");
             }          
         }catch(err){
             console.log("Error",err);
-            toast.error("Server is not responding well pls try later");
         }
         
     }//__________________________________________________________________________________
     
-
-    //if once login user then he can't back into previous signin/up page...
-    useEffect(()=>{
-        const Localtoken  = localStorage.getItem("token");
-        if(Localtoken){
-            navigate("/taskboard");
-        }
-    },[])       
-
-
-
     //simply navigate login form by clicking sign in btn....
     const navigate = useNavigate();
     const clickSignin = ()=>{
